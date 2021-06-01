@@ -14,13 +14,13 @@ import matplotlib.pyplot as plt
 
 
 
-def concatDiverse():
+def concatDiverse(data_dir):
 
-    prior_temp = xr.open_dataset('t_nwpsaf_profiles.nc') 
-    prior_hum = xr.open_dataset('q_nwpsaf_profiles.nc') 
-    prior_oz = xr.open_dataset('oz_nwpsaf_profiles.nc') 
-    prior_ccol = xr.open_dataset('ccol_nwpsaf_profiles.nc') 
-    prior_rcol = xr.open_dataset('rcol_nwpsaf_profiles.nc') 
+    prior_temp = xr.open_dataset(data_dir+'t_nwpsaf_profiles.nc') 
+    prior_hum = xr.open_dataset(data_dir+'q_nwpsaf_profiles.nc') 
+    prior_oz = xr.open_dataset(data_dir+'oz_nwpsaf_profiles.nc') 
+    prior_ccol = xr.open_dataset(data_dir+'ccol_nwpsaf_profiles.nc') 
+    prior_rcol = xr.open_dataset(data_dir+'rcol_nwpsaf_profiles.nc') 
 
     index_all = np.concatenate((prior_temp.variables['index'].values, 
                       prior_hum.variables['index'].values+prior_temp.variables['index'].values[-1], 
@@ -403,22 +403,22 @@ def splitX_all(x):
                             len(btsk_index) ) == len(x)
                             #len(bh2m_index)+len(btsk_index) ) == len(x)
     # State vector output
-    xt = x[t_index]
+    xt = x.loc[t_index] #x[t_index]
     xt.index = h_index
-    xq = x[q_index]
+    xq = x.loc[q_index]  #x[q_index]
     xq.index = h_index
-    xu = x[u_index]
+    xu = x.loc[u_index]  #x[u_index]
     xu.index = su_index
-    xv = x[v_index]
+    xv = x.loc[v_index]  #x[v_index]
     xv.index = sv_index
     # Parameters vector output:
-    xbp2m = x[bp2m_index]
+    xbp2m = x.loc[bp2m_index]  #x[bp2m_index]
     xbp2m.index = sbp2m_index 
-    xbt2m = x[bt2m_index]
+    xbt2m = x.loc[bt2m_index]  #x[bt2m_index]
     xbt2m.index = sbt2m_index
     #xbh2m = x[bh2m_index]
     #xbh2m.index = sbh2m_index
-    xbtsk = x[btsk_index]
+    xbtsk = x.loc[btsk_index]  #x[btsk_index]
     xbtsk.index = sbtsk_index
 
     xt.index.name = 'height'
