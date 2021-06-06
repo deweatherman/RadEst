@@ -11,143 +11,6 @@ import matplotlib.pyplot as plt
 
 
 
-
-
-
-def concatDiverse(data_dir):
-
-    prior_temp = xr.open_dataset(data_dir+'t_nwpsaf_profiles.nc') 
-    prior_hum = xr.open_dataset(data_dir+'q_nwpsaf_profiles.nc') 
-    prior_oz = xr.open_dataset(data_dir+'oz_nwpsaf_profiles.nc') 
-    prior_ccol = xr.open_dataset(data_dir+'ccol_nwpsaf_profiles.nc') 
-    prior_rcol = xr.open_dataset(data_dir+'rcol_nwpsaf_profiles.nc') 
-
-    index_all = np.concatenate((prior_temp.variables['index'].values, 
-                      prior_hum.variables['index'].values+prior_temp.variables['index'].values[-1], 
-                      prior_oz.variables['index'].values+prior_hum.variables['index'].values[-1]+
-                      prior_temp.variables['index'].values[-1],
-                      prior_ccol.variables['index'].values+prior_oz.variables['index'].values[-1]+
-                      prior_hum.variables['index'].values[-1]+prior_temp.variables['index'].values[-1],
-                      prior_rcol.variables['index'].values+prior_ccol.variables['index'].values[-1]+
-                      prior_oz.variables['index'].values[-1]+prior_hum.variables['index'].values[-1]+
-                      prior_temp.variables['index'].values[-1]) 
-                      , axis = None)
-
-    levels_all = prior_hum.height.values # levels are the same for all datasets
-
-    temperature_all = np.concatenate((prior_temp.variables['Temperature'].values, 
-                      prior_hum.variables['Temperature'].values, 
-                      prior_oz.variables['Temperature'].values,
-                      prior_ccol.variables['Temperature'].values,
-                      prior_rcol.variables['Temperature'].values) 
-                      , axis = 1)
-    humidity_all = np.concatenate((prior_temp.variables['Humidity'].values, 
-                      prior_hum.variables['Humidity'].values, 
-                      prior_oz.variables['Humidity'].values,
-                      prior_ccol.variables['Humidity'].values,
-                      prior_rcol.variables['Humidity'].values) 
-                      , axis = 1)
-    pressure_all = np.concatenate((prior_temp.variables['Pressure'].values, 
-                      prior_hum.variables['Pressure'].values, 
-                      prior_oz.variables['Pressure'].values,
-                      prior_ccol.variables['Pressure'].values,
-                      prior_rcol.variables['Pressure'].values) 
-                      , axis = 1)
-    clw_all = np.concatenate((prior_temp.variables['CLW'].values, 
-                      prior_hum.variables['CLW'].values, 
-                      prior_oz.variables['CLW'].values,
-                      prior_ccol.variables['CLW'].values,
-                      prior_rcol.variables['CLW'].values) 
-                      , axis = 1)
-    rain_all = np.concatenate((prior_temp.variables['Rain'].values, 
-                      prior_hum.variables['Rain'].values, 
-                      prior_oz.variables['Rain'].values,
-                      prior_ccol.variables['Rain'].values,
-                      prior_rcol.variables['Rain'].values) 
-                      , axis = 1)
-    surfPressure_all = np.concatenate((prior_temp.variables['SurfPressure'].values, 
-                      prior_hum.variables['SurfPressure'].values, 
-                      prior_oz.variables['SurfPressure'].values,
-                      prior_ccol.variables['SurfPressure'].values,
-                      prior_rcol.variables['SurfPressure'].values) 
-                      , axis = 0)
-    surfTemperature_all = np.concatenate((prior_temp.variables['SurfTemperature'].values, 
-                      prior_hum.variables['SurfTemperature'].values, 
-                      prior_oz.variables['SurfTemperature'].values,
-                      prior_ccol.variables['SurfTemperature'].values,
-                      prior_rcol.variables['SurfTemperature'].values) 
-                      , axis = 0)
-    temperature2m_all = np.concatenate((prior_temp.variables['Temperature2m'].values, 
-                      prior_hum.variables['Temperature2m'].values, 
-                      prior_oz.variables['Temperature2m'].values,
-                      prior_ccol.variables['Temperature2m'].values,
-                      prior_rcol.variables['Temperature2m'].values) 
-                      , axis = 0)
-    dewTemperature2m_all = np.concatenate((prior_temp.variables['DewTemperature2m'].values, 
-                      prior_hum.variables['DewTemperature2m'].values, 
-                      prior_oz.variables['DewTemperature2m'].values,
-                      prior_ccol.variables['DewTemperature2m'].values,
-                      prior_rcol.variables['DewTemperature2m'].values) 
-                      , axis = 0)
-    u10_all = np.concatenate((prior_temp.variables['U10'].values, 
-                      prior_hum.variables['U10'].values, 
-                      prior_oz.variables['U10'].values,
-                      prior_ccol.variables['U10'].values,
-                      prior_rcol.variables['U10'].values) 
-                      , axis = 0)
-    v10_all = np.concatenate((prior_temp.variables['V10'].values, 
-                      prior_hum.variables['V10'].values, 
-                      prior_oz.variables['V10'].values,
-                      prior_ccol.variables['V10'].values,
-                      prior_rcol.variables['V10'].values) 
-                      , axis = 0)
-    w10_all = np.concatenate((prior_temp.variables['W10'].values, 
-                      prior_hum.variables['W10'].values, 
-                      prior_oz.variables['W10'].values,
-                      prior_ccol.variables['W10'].values,
-                      prior_rcol.variables['W10'].values) 
-                      , axis = 0)
-    lat_all = np.concatenate((prior_temp.variables['lat'].values, 
-                      prior_hum.variables['lat'].values, 
-                      prior_oz.variables['lat'].values,
-                      prior_ccol.variables['lat'].values,
-                      prior_rcol.variables['lat'].values) 
-                      , axis = 0)
-    long_all = np.concatenate((prior_temp.variables['long'].values, 
-                      prior_hum.variables['long'].values, 
-                      prior_oz.variables['long'].values,
-                      prior_ccol.variables['long'].values,
-                      prior_rcol.variables['long'].values) 
-                      , axis = 0)
-    time_all = np.concatenate((prior_temp.variables['Time'].values, 
-                      prior_hum.variables['Time'].values, 
-                      prior_oz.variables['Time'].values,
-                      prior_ccol.variables['Time'].values,
-                      prior_rcol.variables['Time'].values) 
-                      , axis = None)
-
-    prior_all = xr.Dataset(data_vars={"Temperature":(["height","index"],temperature_all,{'units':'K'}), 
-                           "Humidity":(["height","index"], humidity_all,{'units':'kg/kg'}),
-                           "Pressure":(["height","index"],pressure_all,{'units':'hPa'}),
-                          "CLW":(["height","index"], clw_all,{'units':'kg/kg'}),
-                          "Rain":(["height","index"], rain_all,{'units':'kg/(m2 *s)'}),
-                          "surfPressure":(["index"], surfPressure_all,{'units':'hPa'}),
-                          "surfTemperature":(["index"], surfTemperature_all,{'units':'K'}),
-                          "Temperature2m":(["index"], temperature2m_all,{'units':'K'}),
-                          "DewTemperature2m":(["index"], dewTemperature2m_all,{'units':'K'}),
-                          "U10":(["index"], u10_all,{'units':'m/s'}),
-                          "V10":(["index"], v10_all,{'units':'m/s'}),
-                          "W10":(["index"], w10_all,{'units':'m/s'}),
-                          "lat":(["index"], lat_all,{'units':'deg'}),
-                          "long":(["index"], long_all,{'units':'deg'}),
-                          "Time":(["index"], time_all,{'units':'s'})}, 
-                coords={"index": (["index"], index_all), 
-                        "height": (["height"], levels_all)},
-                
-               )
-
-    return prior_all
-
 #  *************************************
 
 def maskPrior(prior_all, time_index, lat_long_mask):
@@ -206,41 +69,6 @@ def maskPrior(prior_all, time_index, lat_long_mask):
 
 # **************************************
 
-def spread_seconds(a):
-    # This function takes an array "a" of integers.
-    # The integers represent time ([s]) to a given
-    # "State of the atmosphere". This array of time
-    # is a combination of arrays of time from 
-    # different datasets; therefore is highly
-    # probable that there are duplicated times:
-    # e.g. states of the atmosphere that come from different
-    # datasets/locations. 
-    # We want to create a single dataset with a single "time"
-    # as index, therefore we replace the duplicated elements
-    # by a linearly increasing time array:
-    # 
-    # Pseudocode example:
-    # a = [1530,1530,1530,1530,2123,3042,3042,3042,...]
-    # Then c will be:
-    # c = [1530,1531,1532,1533,2123,3042,3043,3044,...]
-    #
-    # The time of observation is not critical for our application 
-    # Depending on how many repeated times there are (e.g. hundreds), there
-    # will be a difference (up to hundreds) of seconds (so a few minutes) 
-    # respect to the original time vector.
-    
-    b,indexing = np.unique(a,return_index=True)
-    c = np.zeros(len(a), dtype=np.int32)
-    c[indexing] = b
-    indexing2 = np.append(indexing,len(a))
-    
-    for i in range(len(indexing2)-1):
-        n = indexing2[i+1] - indexing2[i]
-        if n>0:
-            c[indexing2[i]:indexing2[i+1]] = a[indexing2[i]:indexing2[i+1]] + np.arange(n)
-            
-    return c  
-
 def timestamp2datetime(t):
     # Converts the integer "t" (timestamp or seconds since 1970-01-01)
     # in a datetime object, taking into account the leap seconds (i.e.
@@ -254,16 +82,6 @@ def timestamp2datetime(t):
     return(c)
 
 
-def timeIndexing(times):
-# Creating a time index for the local prior:
-#times = prior_all['Time'].values[lat_long_mask]
-    times2 = spread_seconds(times)
-        
-    time_index = np.zeros(len(times2),dtype='datetime64[s]')
-    for i in range(len(times2)):
-        time_index[i] = timestamp2datetime(times2[i])
-
-    return time_index
 
 
 def datetime64_to_datetime(dt64):
@@ -888,13 +706,6 @@ def priors2Pandas(priors, flavor = 1, h_season = None):
                             index=priors[season]['time'].values[:])  
         prior_t2m.columns = ['%05i_bt2m' % (i) for i in prior_t2m.columns]
 
-        # 2m humidity is not a mandatory parameter for RTTOV; for now we 
-        # exclude it from the needed variables - 21/01/2021 mario
-        # prior 2m humidity, check "spec_humidity(...)" for documentation
-        #prior_h2m = pd.DataFrame({2.0:np.log10( spec_humidity(priors[season]['surfPressure'].values[:],
-        #                    priors[season]['DewTemperature2m'].values[:],latent='water') ) }, 
-        #                    index=priors[season]['time'].values[:])  
-        #prior_h2m.columns = ['%05i_bh2m' % (i) for i in prior_h2m.columns]
     
         prior_ts = pd.DataFrame({0.0:priors[season]['surfTemperature'].values[:]}, 
                             index=priors[season]['time'].values[:])  
@@ -921,10 +732,6 @@ def priors2Pandas(priors, flavor = 1, h_season = None):
             prior_xa[season] = pd.concat((prior_t, prior_q, prior_u, prior_v), axis=1)
             prior_b[season] = pd.concat(( prior_sp, prior_t2m, prior_ts), axis=1) 
 
-        #if wind_components:
-        #    prior_qts[season] = pd.concat((prior_t, prior_q, prior_u, prior_v), axis=1)
-        #else:
-        #    prior_qts[season] = pd.concat((prior_t, prior_q, prior_w), axis=1)
     
     if h_season is None:
         prior_wind = []
@@ -1031,21 +838,6 @@ def createTrueState(profiles, flavor=1):
         x_truths = pd.concat((profiles_t, profiles_q, profiles_u, profiles_v,
                                  profiles_bp2m, profiles_bt2m, profiles_btsk), 1)
 
-
-    #if windComponents:
-    #    if parametersVector:
-    #        x_truths = pd.concat((profiles_t, profiles_q, profiles_u, profiles_v,
-    #                             profiles_bp2m, profiles_bt2m, profiles_bh2m, profiles_btsk), 1)  
-    #    else:
-    #        x_truths = pd.concat((profiles_t, profiles_q, profiles_u, profiles_v), 1)
-    #else:
-    #    if parametersVector:
-    #        x_truths = pd.concat((profiles_t, profiles_q, profiles_w,
-    #                             profiles_bp2m, profiles_bt2m, profiles_bh2m, profiles_btsk), 1)
-    #    else:
-    #        x_truths = pd.concat((profiles_t, profiles_q, profiles_w), 1)
-
-    #x_truths = x_truths.reindex(sorted(x_truths.index), axis=0)
     x_truths.columns.name = 'state'
     x_truths.index.name = 'time'
 
@@ -1054,64 +846,7 @@ def createTrueState(profiles, flavor=1):
     return x_truths
 
 
-# ************************************
 
-def spec_humidity(p, dew, latent='water'):
-    #"""Calculates SH automatically from the dewpt. Returns in g/kg"""
-    # Declaring constants
-    e0 = 6.113 # saturation vapor pressure in hPa
-    # e0 and Pressure have to be in same units
-    c_water = 5423 # L/R for water in Kelvin
-    c_ice = 6139 # L/R for ice in Kelvin
-    T0 = 273.15 # Kelvin
-    
-    if latent == 'water' or latent == 'Water':
-        c = c_water    # using c for water
-        
-    else:
-        c= c_ice       # using c_ice for ice, clear state
-       
-    #calculating specific humidity, q directly from dew point temperature
-    #using equation 4.24, Pg 96 Practical Meteorolgy (Roland Stull)
-    # https://www.eoas.ubc.ca/books/Practical_Meteorology/
-
-    #q = (622 * e0 * np.exp(c * (dew - T0)/(dew * T0)))/p # g/kg
-    q = np.divide( (622 * e0 * np.exp(c * np.divide( (dew - T0),(dew * T0) ) )), p ) # g/kg
-    # 622 is the ratio of Rd/Rv in g/kg
-
-    return q # return humidity in g / kg
-
-# *****************************************
-
-def hum2TPW(prior_all):
-    # Computes the Total Precipitable Water in mm
-    # following the definition in:
-    # http://www.eumetrain.org/data/3/359/print_2.htm
-    
-    # SUPER inefficient implementation; vectorize, etc. TODO Mario 
-    g = 9.8 # gravitational constant [m/s]
-    rho = 1000 # water density [kg/m**3]
-
-    const = 1/(g*rho)
-
-    TPW = np.zeros(len(prior_all['DewTemperature2m'].index))
-    TPW2 = np.zeros(len(prior_all['DewTemperature2m'].index))
-
-    for ind in np.arange(len(prior_all['DewTemperature2m'].index)):
-        press = np.array(prior_all['Pressure'].isel(index=ind)) 
-        # add surface pressure element to pressure profile:
-        press = np.append(press,np.float(prior_all['surfPressure'].isel(index=ind))) 
-
-        # Calculate surface specific humidity using pressure and dew temp. (g/kg):
-        qsurf = spec_humidity(np.float(prior_all['surfPressure'].isel(index=ind)), 
-                   np.float(prior_all['DewTemperature2m'].isel(index=ind)), latent='water')
-
-        hum = np.array(prior_all['Humidity'].isel(index=ind))*1000 # humidity in g/kg 
-        hum = np.append(hum,qsurf)
-        TPW[ind] = const*np.trapz(hum,press)# the result is in mm
-        TPW2[ind] = const*np.trapz(np.log10(hum),press)# the result is in mm
-    
-    return TPW, TPW2
 
 # **************************************************************
 
