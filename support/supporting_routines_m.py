@@ -846,7 +846,34 @@ def createTrueState(profiles, flavor=1):
     return x_truths
 
 
+# ************************************
 
+def spec_humidity(p, dew, latent='water'):
+    #"""Calculates SH automatically from the dewpt. Returns in g/kg"""
+    # Declaring constants
+    e0 = 6.113 # saturation vapor pressure in hPa
+    # e0 and Pressure have to be in same units
+    c_water = 5423 # L/R for water in Kelvin
+    c_ice = 6139 # L/R for ice in Kelvin
+    T0 = 273.15 # Kelvin
+    
+    if latent == 'water' or latent == 'Water':
+        c = c_water    # using c for water
+        
+    else:
+        c= c_ice       # using c_ice for ice, clear state
+       
+    #calculating specific humidity, q directly from dew point temperature
+    #using equation 4.24, Pg 96 Practical Meteorolgy (Roland Stull)
+    # https://www.eoas.ubc.ca/books/Practical_Meteorology/
+
+    #q = (622 * e0 * np.exp(c * (dew - T0)/(dew * T0)))/p # g/kg
+    q = np.divide( (622 * e0 * np.exp(c * np.divide( (dew - T0),(dew * T0) ) )), p ) # g/kg
+    # 622 is the ratio of Rd/Rv in g/kg
+
+    return q # return humidity in g / kg
+
+# *****************************************
 
 # **************************************************************
 
