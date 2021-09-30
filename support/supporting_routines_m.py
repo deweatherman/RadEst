@@ -875,11 +875,11 @@ def createTrueState(profiles, flavor=1):
     if flavor == 1 or flavor == 3:
    
        x_truths = pd.concat((profiles_t, profiles_q, profiles_w,
-                                 profiles_bp2m, profiles_bt2m, profiles_btsk), 1)
+                                 profiles_bp2m, profiles_bt2m, profiles_btsk), axis=1)
     elif flavor == 2 or flavor == 4:
 
        x_truths = pd.concat((profiles_t, profiles_q, profiles_u, profiles_v,
-                                 profiles_bp2m, profiles_bt2m, profiles_btsk), 1)
+                                 profiles_bp2m, profiles_bt2m, profiles_btsk), axis=1)
     else: 
         print('Error defining x_true for synthetic data creation')
         print('True state by default:')
@@ -887,7 +887,7 @@ def createTrueState(profiles, flavor=1):
         print('State vector: temp. profile, hum. profile, u & v 10m wind speed')
         
         x_truths = pd.concat((profiles_t, profiles_q, profiles_u, profiles_v,
-                                 profiles_bp2m, profiles_bt2m, profiles_btsk), 1)
+                                 profiles_bp2m, profiles_bt2m, profiles_btsk), axis=1)
 
     x_truths.columns.name = 'state'
     x_truths.index.name = 'time'
