@@ -3,7 +3,7 @@
 
 Python based optimal estimation tooling for Satellite Observations; this work has
 been developed in the context of a wind retrievals processor using radiometers from 
-EUMETSAT's Ocean and Sea Ice [OSISAF](https://osi-saf.eumetsat.int/) where [KNMI]() as one of its cooperating members. The intend 
+EUMETSAT's Ocean and Sea Ice [OSISAF](https://osi-saf.eumetsat.int/) where [KNMI](https://www.knmi.nl/over-het-knmi/about) as one of its cooperating members. The intend 
 is the development of a scientific software framework using modern tooling; the main 
 goals are:
 - Code Maintainability
