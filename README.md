@@ -43,7 +43,12 @@ For now we use the markdown standard for Jupyter Notebooks and a "good" commente
 
 This work was kicked off in the context of a project of EUMETSAT's Ocean and Sea Ice [OSISAF](https://osi-saf.eumetsat.int/) and we highly apprecieate their support. Many thanks for the support of the NWPSAF Helpdesk, in particular James Hocking for his responses on the use and settings of RTTOV. Finally but also mainly to Maximilian Maahn for allowing the open source community to benefit and contribute to his pyOpEst tool. 
 
+## Citation and Contribution
 
+This repo is part of the supplementary materials of our work (accepted): "M. Echeverri, A. Verhoef, A. Stoffelen, M. Maahn. Atmospheric Retrievals in a Machine Learning Context: A Radiometric Story Over the Ocean. *ESA-ECMWF Workshop: Machine Learning for Earth System Observation and Prediction, 15-18 November 2021, ESA-ESRIN*".
+If you use these materials please consider citing the mentioned work!
+
+If you want to contribute feel free to do so: ideas, proposals (e.g. via pull request) and constructive criticism are always welcome.
 
 
 
