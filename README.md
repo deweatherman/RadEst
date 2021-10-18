@@ -9,7 +9,6 @@ goals are:
 - Code Maintainability
 - Continuous Quality Improvement
 - Open Science development: Open Source and Transparency
-- Bridge the gap between "low level" scientific software 
 
 ## "RadEst" routines and parts
 
