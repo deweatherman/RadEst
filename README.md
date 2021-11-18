@@ -18,7 +18,7 @@ the two notebooks is the way to compute the Jacobians during the iterative minim
 Hopefully we will get to the point where open source community standards guide proper scientific software development.
 The tools provided in this repo make use of several available packages/environments/software ecosystems such as:
 
-- [pyOpEst](https://github.com/maahn/pyOptimalEstimation)
+- [PyOptimalEstimation](https://github.com/maahn/pyOptimalEstimation)
 - [RTTOV](https://nwp-saf.eumetsat.int/site/software/rttov/)
 - [Pangeo](https://pangeo.io/)
 - [SciPy](https://www.scipy.org/)
@@ -40,7 +40,7 @@ For now we use the markdown standard for Jupyter Notebooks and a "good" commente
 
 ## Acknowledgement
 
-This work was kicked off in the context of a project of EUMETSAT's Ocean and Sea Ice [OSISAF](https://osi-saf.eumetsat.int/) and we highly apprecieate their support. Many thanks for the support of the NWPSAF Helpdesk, in particular James Hocking for his responses on the use and settings of RTTOV. Finally but also mainly to Maximilian Maahn for allowing the open source community to benefit and contribute to his pyOpEst tool. 
+This work was kicked off in the context of a project of EUMETSAT's Ocean and Sea Ice [OSISAF](https://osi-saf.eumetsat.int/) and we highly apprecieate their support. Many thanks for the support of the NWPSAF Helpdesk, in particular James Hocking for his responses on the use and settings of RTTOV. Finally but also mainly to Maximilian Maahn for allowing the open source community to benefit and contribute to his PyOptimalEstimation tool. 
 
 ## Citation and Contribution
 
