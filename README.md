@@ -44,7 +44,7 @@ This work was kicked off in the context of a project of EUMETSAT's Ocean and Sea
 
 ## Citation and Contribution
 
-This repo is part of the supplementary materials of our work (accepted): "M. Echeverri, A. Verhoef, A. Stoffelen, M. Maahn. Atmospheric Retrievals in a Machine Learning Context: A Radiometric Story Over the Ocean. *ESA-ECMWF Workshop: Machine Learning for Earth System Observation and Prediction, 15-18 November 2021, ESA-ESRIN*".
+This repo is part of the supplementary materials of our work: "M. Echeverri, A. Verhoef, A. Stoffelen, M. Maahn. Atmospheric Retrievals in a Machine Learning Context: A Radiometric Story Over the Ocean. *ESA-ECMWF Workshop: Machine Learning for Earth System Observation and Prediction, 15-18 November 2021, ESA-ESRIN*". **Slides** available [here](https://events.ecmwf.int/event/291/contributions/2791/attachments/1490/2700/Mon_1_1_1430_Echeverri.pdf)
 If you use these materials please consider citing the mentioned work!
 
 If you want to contribute feel free to do so: ideas, proposals (e.g. via pull request) and constructive criticism are always welcome.
